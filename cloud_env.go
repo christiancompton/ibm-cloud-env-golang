@@ -48,10 +48,13 @@ func Initialize(mappingsFilePath string) string {
 	version := result.Get("version").Int()
 	result.ForEach(func(key, value gjson.Result) bool {
 		if !result.Get("version").Exists() {
+			log.Info(key.String())
 			processMapping(key.String(), value)
 		} else if version == 1 {
+			log.Info(key.String())
 			processMapping(key.String(), value)
 		} else if version == 2 {
+			log.Info(key.String())
 			processMappingV2(key.String(), value)
 		}
 		return true
@@ -83,7 +86,7 @@ func processMappingV2(mappingName string, config gjson.Result) {
 	config.ForEach(func(key, value gjson.Result) bool {
 		searchPatterns := value.Get("searchPatterns")
 		if !searchPatterns.Exists() || len(searchPatterns.Array()) == 0 {
-			log.Warningln("No credentials found uusing searchPatterns under ", mappingName)
+			log.Warningln("No credentials found using searchPatterns under ", mappingName)
 		}
 
 		searchPatterns.ForEach(func(_, searchPattern gjson.Result) bool {
@@ -106,6 +109,9 @@ func processMappingV2(mappingName string, config gjson.Result) {
 }
 
 func processSearchPattern(mappingName string, searchPattern string) (string, bool) {
+
+	log.Info("Mapping name: ", mappingName)
+	log.Info("Search pattern: ", searchPattern)
 	patternComponents := strings.Split(searchPattern, ":")
 	value := ""
 	OK := false
