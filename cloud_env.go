@@ -192,8 +192,8 @@ func processCFSearchPattern(patternComponents []string) (string, bool) {
 				v.ForEach(func(_, item gjson.Result) bool {
 					if item.Get("name").String() == patternComponents[1] {
 						res, ok = item.Get("credentials").String(), true
-						return false
 						log.Warn("sept")
+						return false
 					} else {
 						log.Warn("huit")
 						return true
