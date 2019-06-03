@@ -287,8 +287,11 @@ func processJSONPath(jsonString string, jsonPath string) (string, bool) {
 	res, err := jsonpath.JsonPathLookup(json_data, jsonPath)
 	_, isMap := res.(map[string]interface{})
 	_, isArr := res.([]interface{})
+	
+	log.Warn("RES: ", res)
 
 	if isMap || isArr {
+		log.Info("2")
 		test, _ := json.Marshal(res)
 		return string(test), err == nil
 	}
