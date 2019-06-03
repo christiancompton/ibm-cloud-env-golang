@@ -128,6 +128,8 @@ func processSearchPattern(mappingName string, searchPattern string) (string, boo
 		log.Warnln("Unknown searchPattern prefix", patternComponents[0], "Supported prefixes: user-provided, cloudfoundry, env, file")
 		return "", false
 	}
+	log.Warn("value: ", value)
+	log.Warn("Ok: ", OK)
 	if !OK {
 		return "", false
 	}
