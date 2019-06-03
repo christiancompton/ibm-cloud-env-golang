@@ -275,9 +275,13 @@ func deepSearch(current gjson.Result, search string) (string, bool) {
 }
 
 func processJSONPath(jsonString string, jsonPath string) (string, bool) {
+	log.Warn("jsonPath processing...")
+	log.Warn("jsonString: ", jsonString)
+	log.Warn("jsonPath: ", jsonPath)
 	var json_data interface{}
 	err := json.Unmarshal([]byte(jsonString), &json_data)
 	if err != nil {
+		log.Info("1")
 		return "", false
 	}
 	res, err := jsonpath.JsonPathLookup(json_data, jsonPath)
