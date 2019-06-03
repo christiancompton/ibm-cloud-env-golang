@@ -284,11 +284,15 @@ func processJSONPath(jsonString string, jsonPath string) (string, bool) {
 		log.Info("1")
 		return "", false
 	}
+	log.Warn("jsonData: ", json_data)
 	res, err := jsonpath.JsonPathLookup(json_data, jsonPath)
+	log.Warn("RES2: ", res)
+	log.Warn("ERR2: ", err)
 	_, isMap := res.(map[string]interface{})
+	log.Warn("RES3: ", res)
 	_, isArr := res.([]interface{})
 	
-	log.Warn("RES: ", res)
+	log.Warn("RES4: ", res)
 
 	if isMap || isArr {
 		log.Info("2")
