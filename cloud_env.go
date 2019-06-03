@@ -136,19 +136,19 @@ func processSearchPattern(mappingName string, searchPattern string) (string, boo
 
 func processFileSearchPattern(patternComponents []string) (string, bool) {
 	filePath, _ := os.Getwd()
-	log.warn("eins")
+	log.Warn("eins")
 	if _, err := os.Stat(filePath); err != nil {
-	  log.warn("zwei")
+	  log.Warn("zwei")
 		log.Errorln("File does not exist", filePath)
 		return "", false
 	} else {
-		log.warn("drei")
+		log.Warn("drei")
 		fullPathName := filePath + patternComponents[1]
-		log.warn("vier")
+		log.Warn("vier")
 		json, err := ioutil.ReadFile(fullPathName)
-		log.warn("funf")
+		log.Warn("funf")
 		if err != nil {
-			log.warn("sechs")
+			log.Warn("sechs")
 			log.Errorln(err)
 			return "", false
 		}
