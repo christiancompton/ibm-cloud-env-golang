@@ -135,6 +135,7 @@ func processSearchPattern(mappingName string, searchPattern string) (string, boo
 }
 
 func processFileSearchPattern(patternComponents []string) (string, bool) {
+	log.Warn("Searching for my File pattern")
 	filePath, _ := os.Getwd()
 	log.Warn("eins")
 	if _, err := os.Stat(filePath); err != nil {
@@ -162,6 +163,7 @@ func processFileSearchPattern(patternComponents []string) (string, bool) {
 }
 
 func processCFSearchPattern(patternComponents []string) (string, bool) {
+	log.Warn("Searching for my CF pattern")
 	vcapServicesString, ok_service := os.LookupEnv("VCAP_SERVICES")
 	vcapApplicationString, ok_app := os.LookupEnv("VCAP_APPLICATION")
 	if !ok_service && !ok_app {
@@ -200,6 +202,7 @@ func processCFSearchPattern(patternComponents []string) (string, bool) {
 }
 
 func processEnvSearchPattern(patternComponents []string) (string, bool) {
+	log.Warn("Searching for my ENV pattern")
 	value, OK := os.LookupEnv(patternComponents[1])
 	if OK && (len(patternComponents) == 3) {
 		return processJSONPath(value, patternComponents[2])
@@ -208,6 +211,7 @@ func processEnvSearchPattern(patternComponents []string) (string, bool) {
 }
 
 func processUserProvidedSearchPattern(patternComponents []string) (string, bool) {
+	log.Warn("Searching for my UPS pattern")
 	vcapServicesString, ok := os.LookupEnv("VCAP_SERVICES")
 	if !ok {
 		return "", false
