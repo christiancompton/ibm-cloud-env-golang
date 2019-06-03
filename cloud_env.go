@@ -169,34 +169,46 @@ func processCFSearchPattern(patternComponents []string) (string, bool) {
 	vcapServicesString, ok_service := os.LookupEnv("VCAP_SERVICES")
 	vcapApplicationString, ok_app := os.LookupEnv("VCAP_APPLICATION")
 	if !ok_service && !ok_app {
+		log.Warn("un")
 		return "", false
 	} else {
 		if patternComponents[1][0] == '$' {
+			log.Warn("deux")
 			value, OK := processJSONPath(vcapServicesString, patternComponents[1])
 			if OK {
+				log.Warn("trois")
 				return value, true
 			} else {
+				log.Warn("quatre")
 				return processJSONPath(vcapApplicationString, patternComponents[1])
 			}
 		} else {
 			// patternComponents[1] is a service instance name, find it in VCAP_SERVICES and return credentials object
+			log.Warn("cinq")
 			json := gjson.Parse(vcapServicesString)
 			res, ok := "", false
 			json.ForEach(func(k, v gjson.Result) bool {
+				log.Warn("seis")
 				v.ForEach(func(_, item gjson.Result) bool {
 					if item.Get("name").String() == patternComponents[1] {
 						res, ok = item.Get("credentials").String(), true
 						return false
+						log.Warn("sept")
 					} else {
+						log.Warn("huit")
 						return true
 					}
 				})
 				if ok {
+					log.Warn("neuf")
 					return false
 				} else {
+					log.Warn("dix")
 					return true
 				}
 			})
+			log.Warn("res: ", res)
+			log.Warn("CF ok: ", ok)
 			return res, ok
 
 		}
