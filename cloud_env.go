@@ -222,6 +222,8 @@ func processEnvSearchPattern(patternComponents []string) (string, bool) {
 	value, OK := os.LookupEnv(patternComponents[1])
 	log.Info("value from envSearch:", value)
 	log.Info("OK from envSearch:", OK)
+	env := os.Environ()
+	log.Warn("ENVIRONMENT: ", env)
 	if OK && (len(patternComponents) == 3) {
 		log.Info("patternComponents[2]: ", patternComponents[2])
 		return processJSONPath(value, patternComponents[2])
