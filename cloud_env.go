@@ -217,7 +217,12 @@ func processCFSearchPattern(patternComponents []string) (string, bool) {
 
 func processEnvSearchPattern(patternComponents []string) (string, bool) {
 	log.Warn("Searching for my ENV pattern")
+	log.Info("patternComponents[0]: ", patternComponents[0])
+	log.Info("patternComponents[1]: ", patternComponents[1])
+	log.Info("patternComponents[1]: ", patternComponents[2])
 	value, OK := os.LookupEnv(patternComponents[1])
+	log.Info("value from envSearch:", value)
+	log.Info("OK from envSearch:", OK)
 	if OK && (len(patternComponents) == 3) {
 		return processJSONPath(value, patternComponents[2])
 	}
